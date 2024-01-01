@@ -1,5 +1,5 @@
 # Weather-App-Using-JavaScript
-<<<<<<< HEAD
+<<<<<<< HEAD>>>
 **Introduction**
 
 This is a simple weather app that allows users to enter a city name and receive the current weather conditions for that city. The app is built using HTML, CSS, and JavaScript.
@@ -19,5 +19,3 @@ The app consists of the following files:
 * index.html: This file contains the HTML code for the app.
 * style.css: This file contains the CSS code for the app.
 * app.js: This file contains the JavaScript code for the app.
-=======
->>>>>>> eb9cf09 (css)
