@@ -1,0 +1,7 @@
+* {
+    /* This CSS is applicable for all HTML elements */
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins', sans-serif;
+    box-sizing: border-box;  /* Fix the typo here */
+}
