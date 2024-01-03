@@ -1,19 +1,122 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Weather App</title>
-        <link rel="stylesheet" href="style.css">
-
-    </head>
-    <body>
-        //learning using comments is fun lets do this 
-        <div class="container">
-            <h1>Weather App</h1>
-            <form>
-                <input type="text" name="city" placeholder="Enter a city name">
-                <button type="submit">Submit</button>
-            </form>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="card">
+        <div class="search">
+            <!-- Input box for entering city name -->
+            <input type="text" placeholder="Enter city name" spellcheck="false">
+            <!-- Button to trigger weather check -->
+            <button> <img src="images/search.png"></button>
         </div>
-    </body>
+        <div class="error">
+            <p>INVALID CITY NAME </p> 
+
+        </div>
+        <div class="weather">
+            <!-- Weather icon to be dynamically changed -->
+            <img src="images/rain.png" class="weather-icon">
+            <!-- Display temperature -->
+            <h1 class="temp">22°C</h1>
+            <!-- Display city and country -->
+            <h2 class="city">New York</h2>
+            <div class="details">
+                <!-- Humidity information -->
+                <div class="col">
+                    <img src="images/humidity.png">
+                    <div>
+                        <p class="humidity">50%</p>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+                <!-- Wind speed information -->
+                <div class="col">
+                    <img src="images/wind.png">
+                    <div>
+                        <p class="wind">15km/h</p>
+                        <p>Wind Speed</p>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <script>
+        // API key for OpenWeatherMap
+        const apiKey = "b0fdd0d2372d206c4de60c1c82590d1f";
+        // API URL for fetching weather data
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+        // Selectors for HTML elements
+        const searchBox = document.querySelector(".search input");
+        const searchBtn = document.querySelector(".search button");
+        const weatherIcon = document.querySelector(".weather-icon");
+
+       // Function to check weather based on city name
+// Function to check weather based on city name
+async function checkWeather(city) {
+    // Fetch weather data from OpenWeatherMap API
+    const response = await fetch(`${apiUrl}${city}&appid=${apiKey}`);
+    // Function to check for errors if capital city is not working 
+    if (response.status == 404){
+        document.querySelector(".error").style.display = "block";
+        document.querySelector(".weather").style.display = "none";
+    }
+    else{
+        document.querySelector(".error").style.display = "none";
+    }
+    const data = await response.json();
+
+    // Handle city not found
+    if (data.cod === "404") {
+        console.error("City not found");
+        return;
+    }
+
+    // Display city and country
+    const cityCountry = `${data.name}, ${data.sys && data.sys.country ? data.sys.country : ''}`;
+    document.querySelector(".city").innerHTML = cityCountry;
+    // Display temperature
+    document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "°C";
+    // Display humidity
+    document.querySelector(".humidity").innerHTML = data.main.humidity + "%";
+    // Display wind speed
+    document.querySelector(".wind").innerHTML = data.wind.speed + "km/h";
+
+    // Case-insensitive comparisons for weather conditions
+    const weatherMain = data.weather[0].main.toLowerCase();
+
+    // Update weather icon based on conditions
+    if (weatherMain === "clouds") {
+        weatherIcon.src = "images/clouds.png";
+    } else if (weatherMain === "clear") {
+        weatherIcon.src = "images/clear.png";
+    } else if (weatherMain === "rain") {
+        weatherIcon.src = "images/rain.png";
+    } else if (weatherMain === "drizzle") {
+        weatherIcon.src = "images/drizzle.png";
+    } else if (weatherMain === "mist") {
+        weatherIcon.src = "images/mist.png";
+    }
+    document.querySelector(".weather").style.display = "block";
+
+}
+        // Event listener for Enter key in the search box
+        searchBox.addEventListener("keyup", (event) => {
+            if (event.key === "Enter") {
+                const cityName = searchBox.value.trim();
+                checkWeather(cityName);
+            }
+        });
+
+        // Event listener for the search button click
+        searchBtn.addEventListener("click", () => {
+            const cityName = searchBox.value.trim();
+            checkWeather(cityName);
+        });
+    </script>
+</div>
+</body>
 </html>
