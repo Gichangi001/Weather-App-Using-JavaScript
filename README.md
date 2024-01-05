@@ -19,3 +19,11 @@ The app consists of the following files:
 * index.html: This file contains the HTML code for the app.
 * style.css: This file contains the CSS code for the app.
 * app.js: This file contains the JavaScript code for the app.
+
+* side note the api i used
+* weather api key - <script>
+        // API key for OpenWeatherMap
+        const apiKey = "b0fdd0d2372d206c4de60c1c82590d1f";
+        // API URL for fetching weather data
+        const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+        // Selectors for HTML elements
