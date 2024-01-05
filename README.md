@@ -24,7 +24,9 @@ The app consists of the following files:
 * side note the api i used
 * weather api key - <script>
         // API key for OpenWeatherMap
-        const apiKey = "b0fdd0d2372d206c4de60c1c82590d1f";
-        // API URL for fetching weather data
+        const apiKey = "b0fdd0d2372d206c4de60c1c82590d1f";![When you put in a city ](https://github.com/Gichangi001/Weatherapp.github.io/assets/127599853/d882e473-9e84-4470-9b3b-0f7d3234dc1c)
+
+        // API URL for fetching weather data![Intro page when you load png ](https://github.com/Gichangi001/Weatherapp.github.io/assets/127599853/bb42a18c-3a1a-47f2-85bd-d1ce1eae40ee)
+
         const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
         // Selectors for HTML elements
